@@ -78,7 +78,9 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   //POST: returns true if the specified value is in the map  
   public boolean containsValue(V value) {
      System.out.println("TASK 1: containsValue Needs Completion");
-    
+     for (K key: keySet()) {
+      if (get(key).equals(value)) return true;
+     };
      return false;
   }
   
