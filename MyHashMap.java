@@ -77,7 +77,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   //PRE:  accepts a value
   //POST: returns true if the specified value is in the map  
   public boolean containsValue(V value) {
-     System.out.println("TASK 1: containsValue Needs Completion");
      for (K key: keySet()) {
       if (get(key).equals(value)) return true;
      };
@@ -152,7 +151,13 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   //      if found, removes item using remove function (from linked list)
 
   public void remove(K key) {
-    System.out.println("TASK 2: Remove Needs Completion");
+    for (int i = 0; i < capacity; i++) {
+      if (table[i] != null) {
+        MyLinkedList<Entry<K, V>> bucket = table[i]; 
+        for (Entry<K, V> entry: bucket)
+          if (entry.key.equals(key)) bucket.remove(entry);
+      }
+    }
   }
   
   
