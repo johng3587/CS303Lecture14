@@ -175,7 +175,31 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   //      update size
   //      return value
   public V put(K key, V value) {
-    System.out.println("TASK 3: Put Needs Completion");
+    if (get(key) != null) {
+      int bucketIndex = hash(key.hashCode());
+      MyLinkedList<Entry<K,V>> bucket = table[bucketIndex];
+      for(Entry<K,V> entry: bucket) {
+        if(entry.getKey().equals(key)) {
+          V oldEntry = entry.getValue();
+          entry.value = value;
+          return oldEntry;
+        }
+      }
+    }
+
+    if (size >= (capacity * loadFactorThreshold)) {
+      if (capacity == MAXIMUM_CAPACITY)
+        throw new RuntimeException("No more room in the inn");
+      rehash();
+    }
+
+    int bucketIndex = hash(key.hashCode());
+    if (table[bucketIndex] == null) {
+      table[bucketIndex] = new MyLinkedList<Entry<K,V>>();
+    }
+
+    table[bucketIndex].add(new MyMap.Entry<K,V>(key, value));
+    size++;
     
     return value;  
   } 
