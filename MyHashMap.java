@@ -260,9 +260,12 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     
     //get entries & double capacity
     java.util.Set<Entry<K, V>> set = entrySet(); // Get entries
-    capacity <<= 1; // Double capacity    
-
-    System.out.println("TASK 4: Rehash Needs Completion");
+    capacity <<= 1; // Double capacity
+    table = new MyLinkedList[capacity];
+    size = 0;
+    for (Entry<K,V> entry: set) {
+      put(entry.getKey(), entry.getValue());
+    }
   }
 
   //TASK 5: VALUES
